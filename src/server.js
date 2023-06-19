@@ -29,6 +29,13 @@ app.post("/test", (req,res)=>{
     })
 })
 
+// delete request
+app.post("/test", (req,res)=>{
+    res.status(200).send({
+        message: "delete: api is working fine"
+    })
+})
+
 // App listener
 app.listen(port, ()=> {
     console.log(`Server is running at port: http://localhost:${port}`)
