@@ -22,6 +22,13 @@ app.post("/test", (req,res)=>{
     })
 })
 
+// Put request
+app.post("/test", (req,res)=>{
+    res.status(200).send({
+        message: "put: api is working fine"
+    })
+})
+
 // App listener
 app.listen(port, ()=> {
     console.log(`Server is running at port: http://localhost:${port}`)
