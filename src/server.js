@@ -10,7 +10,16 @@ app.use(morgan("dev"));
 // Get request
 // Root derectory
 app.get("/", (req,res) => {
-res.send("Welcome to server")
+res.status(200).send({
+    message: "Hey Welcome to the server"
+})
+})
+
+// Post request
+app.post("/test", (req,res)=>{
+    res.status(200).send({
+        message: "post: api is working fine"
+    })
 })
 
 // App listener
