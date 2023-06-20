@@ -6,13 +6,31 @@ const morgan = require("morgan");
 
 // Middleware
 app.use(morgan("dev"));
+app.use(express.json());
+app.use(express.urlencoded({extended: true}))
+
+// Custom MiddleWare
+const isLoggedIn = (req,res,next) => {
+    const loggedIn = false;
+
+    if(loggedIn){
+        console.log("middleWare working")
+        req.body.id = 401
+        next()
+    } else {
+        return res.send({
+            message: "please login first"
+        })
+    }
+}
 
 // Get request
 // Root derectory
-app.get("/", (req,res) => {
-res.status(200).send({
+app.get("/", isLoggedIn, (req,res) => {
+    console.log(req.body.id)
+    res.status(200).send({
     message: "Hey Welcome to the server"
-})
+    })
 })
 
 // Post request
@@ -23,14 +41,14 @@ app.post("/test", (req,res)=>{
 })
 
 // Put request
-app.post("/test", (req,res)=>{
+app.put("/test", (req,res)=>{
     res.status(200).send({
         message: "put: api is working fine"
     })
 })
 
 // delete request
-app.post("/test", (req,res)=>{
+app.delete("/test", (req,res)=>{
     res.status(200).send({
         message: "delete: api is working fine"
     })
