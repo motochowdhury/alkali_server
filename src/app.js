@@ -3,30 +3,30 @@ const app = express();
 const morgan = require("morgan");
 const createError = require('http-errors');
 const bodyParser = require("body-parser");
+// const xssClean = require('xss-clean');
+const rateLimit = require('express-rate-limit');
+
+// rate limter middleware
+
+const rateLimiter = rateLimit({
+    windowMs: 1 * 60 * 1000,
+    max: 5,
+    message: 'to many request from this ip address'
+})
 
 // Middleware
+app.use(rateLimiter)
+// app.use(xssClean);
 app.use(morgan("dev"));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}))
 
-// Custom MiddleWare
-const isLoggedIn = (req,res,next) => {
-    const loggedIn = false;
 
-    if(loggedIn){
-        console.log("middleWare working")
-        req.body.id = 401
-        next()
-    } else {
-        return res.send({
-            message: "please login first"
-        })
-    }
-}
+
 
 // Get request
 // Root derectory
-app.get("/", isLoggedIn, (req,res) => {
+app.get("/", (req,res) => {
     console.log(req.body.id)
     res.status(200).send({
     message: "Hey Welcome to the server"
