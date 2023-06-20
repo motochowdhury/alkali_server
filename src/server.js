@@ -60,9 +60,14 @@ app.use((req,res,next) => {
     res.status(404).send({
         message:"route not found"
     })
+    next()
 }
 ) 
 
+// server error handler
+app.use((err,req,res,next) => {
+    res.status(500).send('Something broke!')
+})
 
 // App listener
 app.listen(port, ()=> {
