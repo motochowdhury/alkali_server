@@ -1,7 +1,6 @@
 // Internal Require
-require('dotenv').config();
 const app = require("./app")
-const serverPort = process.env.SERVER_PORT || 5001
+const serverPort = require("./secret")
 
 // App listener
 app.listen(serverPort, ()=> {
