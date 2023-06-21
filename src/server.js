@@ -1,7 +1,9 @@
 // Internal Require
+require('dotenv').config();
 const app = require("./app")
+const serverPort = process.env.SERVER_PORT || 5001
 
 // App listener
-app.listen(5000, ()=> {
-    console.log(`Server is running at port: http://localhost:5000`)
+app.listen(serverPort, ()=> {
+    console.log(`Server is running at port: http://localhost:${serverPort}`)
 })
