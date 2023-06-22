@@ -5,6 +5,7 @@ const createError = require('http-errors');
 const bodyParser = require("body-parser");
 // const xssClean = require('xss-clean');
 const rateLimit = require('express-rate-limit');
+const expressRouter = require("./routers/test");
 
 // rate limter middleware
 
@@ -20,10 +21,7 @@ app.use(rateLimiter)
 app.use(morgan("dev"));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}))
-
-
-
-
+app.use(expressRouter)
 
 // Post request
 app.post("/test", (req,res)=>{
