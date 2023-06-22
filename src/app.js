@@ -24,14 +24,6 @@ app.use(bodyParser.urlencoded({extended: true}))
 
 
 
-// Get request
-// Root derectory
-app.get("/", (req,res) => {
-    console.log(req.body.id)
-    res.status(200).send({
-    message: "Hey Welcome to the server"
-    })
-})
 
 // Post request
 app.post("/test", (req,res)=>{
