@@ -1,8 +1,11 @@
 // Internal Require
 const app = require("./app")
-const serverPort = require("./secret")
+const connectDb = require("./config/db")
+const {serverPort} = require("./secret")
 
 // App listener
-app.listen(serverPort, ()=> {
+app.listen(serverPort, async()=> {
     console.log(`Server is running at port: http://localhost:${serverPort}`)
+    // run mongoDB connection
+    await connectDb()
 })
