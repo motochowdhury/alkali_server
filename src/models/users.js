@@ -22,3 +22,6 @@ const userSchema = new Schema({
         unique: true
     }
 })
+
+const users = model('Users', userSchema);
+module.exports = users;
