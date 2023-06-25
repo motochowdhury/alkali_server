@@ -1,7 +1,11 @@
-const user = [
-    {id: 1, name: "moto"},
-    {id: 2, name: "moto"},
-    {id: 3, name: "moto"}
-]
+const {Schema, model} = require("mongoose");
 
-module.exports = user;
+const userSchema = new Schema({
+    name: {
+        type: String,
+        require: [true, 'Name is required'],
+        trim: true,
+        min: [3, 'Minimum 3 charecter required'],
+        max: [30, 'Maximum 30 charecter is acceptable']
+    }
+})
