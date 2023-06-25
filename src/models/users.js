@@ -1,4 +1,5 @@
 const {Schema, model} = require("mongoose");
+const bcrypt = require("bcrypt");
 
 const userSchema = new Schema({
     name: {
@@ -20,6 +21,12 @@ const userSchema = new Schema({
             }
         },
         unique: true
+    },
+    password: {
+        type: String,
+        require: [true, 'password is must be required'],
+        min: [6, "Mininux length of password is 6 character"],
+        set: (v)=> bcrypt.hashSync(v, bcrypt.genSalt(10))
     }
 })
 
