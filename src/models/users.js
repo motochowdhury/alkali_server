@@ -38,5 +38,5 @@ const userSchema = new Schema({
     },
 })
 
-const users = model('Users', userSchema);
-module.exports = users;
+const Users = model('Users', userSchema);
+module.exports = Users;

@@ -5,7 +5,7 @@ const createError = require('http-errors');
 const bodyParser = require("body-parser");
 // const xssClean = require('xss-clean');
 const rateLimit = require('express-rate-limit');
-const expressRouter = require("./routers/test");
+const expressRouter = require("./routers/userRoute");
 const seedRouter = require("./routers/seedRouter");
 
 // rate limter middleware
@@ -22,8 +22,8 @@ app.use(rateLimiter)
 app.use(morgan("dev"));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}))
-app.use(expressRouter)
-app.use(seedRouter)
+app.use('/api',expressRouter)
+app.use('/seed',seedRouter)
 
 // Post request
 app.post("/test", (req,res)=>{

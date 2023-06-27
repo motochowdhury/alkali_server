@@ -1,9 +1,9 @@
 const express = require("express");
-const test = require("../controller/testController");
+const getUsers = require('../controller/getUserController')
 const expressRouter = express.Router();
 
 // Get request
 // Root derectory
-expressRouter.get("/", test);
+expressRouter.get("/users", getUsers);
 
 module.exports = expressRouter;
