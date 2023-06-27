@@ -27,7 +27,15 @@ const userSchema = new Schema({
         require: [true, 'password is must be required'],
         minlength: [6, "Mininux length of password is 6 character"],
         set: (v)=> bcrypt.hashSync(v, bcrypt.genSaltSync(10))
-    }
+    },
+    isAdmin: {
+        type: Boolean,
+        default: false,
+    },
+    isBanned: {
+        type: Boolean,
+        default: false,
+    },
 })
 
 const users = model('Users', userSchema);
