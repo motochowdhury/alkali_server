@@ -17,6 +17,7 @@ const getUser = async (req,res,nex)=>{
             password: 0
         }
         const users = await Users.find(filter,options).limit(limit).skip((page -1 * limit));
+        const count = await Users.find(filter).countDocuments()
         return res.status(200).json(users)
     } catch (error) {
         
