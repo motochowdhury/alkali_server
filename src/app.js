@@ -7,6 +7,7 @@ const bodyParser = require("body-parser");
 const rateLimit = require('express-rate-limit');
 const expressRouter = require("./routers/userRoute");
 const seedRouter = require("./routers/seedRouter");
+const { errorResponse } = require("./controller/responseController");
 
 // rate limter middleware
 
@@ -55,8 +56,8 @@ app.use((req,res,next) => {
 
 // server error handler
 app.use((err,req,res,next) => {
-    return res.status(err.status || 500).json({
-        success: false,
+    return errorResponse(res, {
+        statusCode: err.status,
         message: err.message
     })
 })
