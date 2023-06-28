@@ -7,7 +7,7 @@ const errorResponse = (res, {statusCode = 500, message = "Internal server error"
 }
 
 // For handling success response
-const successResponse = (res, {statusCode = 200, message = "Success done",palyload}) => {
+const successResponse = (res, {statusCode = 200, message = "Success done", palyload = {}}) => {
     return res.status(statusCode).json({
         sucess: true,
         message,

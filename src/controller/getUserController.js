@@ -22,9 +22,10 @@ const getUser = async (req,res,nex)=>{
         const count = await Users.find(filter).countDocuments()
 
         if(!users) throw createError(300, 'Data not found');
-        
+
+        // Response return
         return successResponse(res, {
-            statusCode: res.status,
+            statusCode: req.status,
             message: 'users were returned',
             palyload: {
                 users,
