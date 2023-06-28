@@ -15,4 +15,4 @@ const successResponse = (res, {statusCode = 200, message = "Success done",palylo
     })
 }
 
-module.exports = {errorResponse}
+module.exports = {errorResponse, successResponse}

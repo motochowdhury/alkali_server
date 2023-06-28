@@ -1,5 +1,6 @@
 const createError = require('http-errors')
-const Users = require('../models/users')
+const Users = require('../models/users');
+const { successResponse } = require('./responseController');
 const getUser = async (req,res,nex)=>{
     try {
         const search = req.query.search || '';
@@ -21,14 +22,18 @@ const getUser = async (req,res,nex)=>{
         const count = await Users.find(filter).countDocuments()
 
         if(!users) throw createError(300, 'Data not found');
-        return res.status(200).send({
+        
+        return successResponse(res, {
+            statusCode: res.status,
             message: 'users were returned',
-            users,
+            palyload: {
+                users,
             pagination: {
                 totalPages: Math.ceil(count / limit),
                 currentPage: page,
                 prevPage: page - 1 > 0 ? page-1 : null,
                 nextPage: page + 1 <  Math.ceil(count / limit) ? page + 1 : null
+            }
             }
         })
     } catch (error) {
