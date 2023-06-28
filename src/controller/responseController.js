@@ -4,3 +4,5 @@ const errorResponse = (res, {statusCode = 500, message = "Internal server error"
         message,
     })
 }
+
+module.exports = {errorResponse}
