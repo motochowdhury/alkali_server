@@ -1,11 +1,13 @@
 const createError = require('http-errors')
 const Users = require('../models/users');
 const { successResponse } = require('./responseController');
+
+// To get all users
 const getUsers = async (req,res,nex)=>{
     try {
         const search = req.query.search || '';
         const page = Number(req.query.page) || 1;
-        const limit = Number(req.query.limit) || 1;
+        const limit = Number(req.query.limit) || 5;
         const searchRegEx = RegExp('.*' + search + '.*', 'i');
         const filter = {
             isAdmin: {$ne: true},
@@ -42,4 +44,28 @@ const getUsers = async (req,res,nex)=>{
     }
 }
 
-module.exports = getUsers;
+// To get single user
+const getUser = async (req,res, next) => {
+    try {
+        // To recieve id from params
+        const id = req.params.id;
+        // Avoiding Password
+        const option = {password : 0}; 
+        // find user byId
+        const user = await Users.findById(id, option)
+        // if empty user
+        if(!user) {throw createError('404', "user doesn't exist")};
+        // response sending
+        return successResponse(res, {
+            statusCode: 200,
+            message: "user were returned",
+            palyload: {
+                user
+            }
+        })
+    } catch (error) {
+        next(error)
+    }
+}
+
+module.exports = {getUsers, getUser};

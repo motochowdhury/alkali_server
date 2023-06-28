@@ -23,8 +23,12 @@ app.use(rateLimiter)
 app.use(morgan("dev"));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}))
-app.use('/api',expressRouter)
+// Seed api
 app.use('/seed',seedRouter)
+// get all user
+app.use('/api',expressRouter)
+// get a single user
+app.use('/api', expressRouter)
 
 // Post request
 app.post("/test", (req,res)=>{
