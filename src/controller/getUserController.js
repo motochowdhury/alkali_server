@@ -1,7 +1,7 @@
 const createError = require('http-errors')
 const Users = require('../models/users');
 const { successResponse } = require('./responseController');
-const getUser = async (req,res,nex)=>{
+const getUsers = async (req,res,nex)=>{
     try {
         const search = req.query.search || '';
         const page = Number(req.query.page) || 1;
@@ -21,7 +21,7 @@ const getUser = async (req,res,nex)=>{
         const users = await Users.find(filter,options).limit(limit).skip((page -1) * limit);
         const count = await Users.find(filter).countDocuments()
 
-        if(!users) throw createError(300, 'Data not found');
+        if(!users) {throw createError(300, 'Data not found')};
 
         // Response return
         return successResponse(res, {
@@ -38,8 +38,8 @@ const getUser = async (req,res,nex)=>{
             }
         })
     } catch (error) {
-        
+        next()
     }
 }
 
-module.exports = getUser;
+module.exports = getUsers;
