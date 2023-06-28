@@ -1,6 +1,7 @@
 const createError = require('http-errors')
 const Users = require('../models/users');
 const { successResponse } = require('./responseController');
+const { default: mongoose } = require('mongoose');
 
 // To get all users
 const getUsers = async (req,res,nex)=>{
@@ -64,6 +65,11 @@ const getUser = async (req,res, next) => {
             }
         })
     } catch (error) {
+        // mongoDb error handling
+        if(error instanceof mongoose.Error) {
+            next(createError('500', 'invalid user id'))
+            return;
+        }
         next(error)
     }
 }
