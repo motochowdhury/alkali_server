@@ -1,13 +1,13 @@
 // Internal import
 const createError = require("http-errors");
 const Users = require("../models/users");
-const { default: mongoose } = require("mongoose");
+const { mongoose } = require("mongoose");
 
 // findUserById function
-const findItemById = async(id, options) => {
+const findItemById = async(id, options = {}) => {
 try {
     // find user byId
-    const item = await Users.findById(id, option)
+    const item = await Users.findById(id, options)
     // if empty user
     if(!item) {throw createError('404', "Item doesn't exist")};
     // return user

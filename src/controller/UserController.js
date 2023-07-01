@@ -1,7 +1,7 @@
 const createError = require('http-errors')
 const Users = require('../models/users');
 const { successResponse } = require('./responseController');
-const { findItemById } = require('../services/findUserById');
+const { findItemById } = require('../services/findItem');
 
 // To get all users
 const getUsers = async (req,res,nex)=>{
@@ -65,5 +65,22 @@ const getUser = async (req,res, next) => {
         next(error)
     }
 }
+// To delete single user
+const deleteUser = async (req,res, next) => {
+    try {
+        // To recieve id from params
+        const id = req.params.id;
+        const user = await findItemById(id)
+        // delete user
+        await Users.deleteOne({_id: id, isAdmin: false})
+        // response sending
+        return successResponse(res, {
+            statusCode: 200,
+            message: "user was deleted",
+        })
+    } catch (error) {
+        next(error)
+    }
+}
 
-module.exports = {getUsers, getUser};
+module.exports = {getUsers, getUser, deleteUser};
