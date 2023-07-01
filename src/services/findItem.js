@@ -4,20 +4,18 @@ const Users = require("../models/users");
 const { default: mongoose } = require("mongoose");
 
 // findUserById function
-const findUserById = async(id) => {
+const findItemById = async(id, options) => {
 try {
-    // Avoiding Password
-    const option = {password : 0}; 
     // find user byId
-    const user = await Users.findById(id, option)
+    const item = await Users.findById(id, option)
     // if empty user
-    if(!user) {throw createError('404', "user doesn't exist")};
+    if(!item) {throw createError('404', "Item doesn't exist")};
     // return user
-    return user;
+    return item;
 } catch (error) {
     // mongoDb error handling
     if(error instanceof mongoose.Error) {
-        throw createError('500', 'invalid user id')
+        throw createError('500', 'invalid Item id')
     }
 
     throw error;
@@ -26,4 +24,4 @@ try {
 }
 
 // Export services
-module.exports = {findUserById}
+module.exports = {findItemById}

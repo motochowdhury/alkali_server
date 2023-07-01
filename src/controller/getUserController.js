@@ -1,8 +1,7 @@
 const createError = require('http-errors')
 const Users = require('../models/users');
 const { successResponse } = require('./responseController');
-const mongoose = require('mongoose');
-const { findUserById } = require('../services/findUserById');
+const { findItemById } = require('../services/findUserById');
 
 // To get all users
 const getUsers = async (req,res,nex)=>{
@@ -51,7 +50,9 @@ const getUser = async (req,res, next) => {
     try {
         // To recieve id from params
         const id = req.params.id;
-        const user = await findUserById(id)
+         // Avoiding Password
+        const options = {password : 0}; 
+        const user = await findItemById(id, options)
         // response sending
         return successResponse(res, {
             statusCode: 200,
