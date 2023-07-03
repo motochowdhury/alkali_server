@@ -52,7 +52,7 @@ const getUser = async (req,res, next) => {
         const id = req.params.id;
          // Avoiding Password
         const options = {password : 0}; 
-        // find user
+      
         const user = await findItemById(id, options)
         // response sending
         return successResponse(res, {
