@@ -1,5 +1,6 @@
 const {Schema, model} = require("mongoose");
 const bcrypt = require("bcrypt");
+const { profileImage } = require("../secret");
 
 const userSchema = new Schema({
     name: {
@@ -27,6 +28,10 @@ const userSchema = new Schema({
         require: [true, 'password is must be required'],
         minlength: [6, "Mininux length of password is 6 character"],
         set: (v)=> bcrypt.hashSync(v, bcrypt.genSaltSync(10))
+    },
+    image: {
+        type: String,
+        default: profileImage
     },
     isAdmin: {
         type: Boolean,
