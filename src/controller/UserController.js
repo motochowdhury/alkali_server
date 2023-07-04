@@ -52,8 +52,7 @@ const getUser = async (req,res, next) => {
         const id = req.params.id;
          // Avoiding Password
         const options = {password : 0}; 
-      
-        const user = await findItemById(id, options)
+        const user = await findItemById(Users,id, options)
         // response sending
         return successResponse(res, {
             statusCode: 200,
@@ -71,7 +70,7 @@ const deleteUser = async (req,res, next) => {
     try {
         // To recieve id from params
         const id = req.params.id;
-        const user = await findItemById(id)
+        const user = await findItemById(Users,id)
         // delete user
         await Users.deleteOne({_id: id, isAdmin: false})
         // response sending
