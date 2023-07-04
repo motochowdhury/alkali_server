@@ -2,6 +2,7 @@ const createError = require('http-errors')
 const Users = require('../models/users');
 const { successResponse } = require('./responseController');
 const { findItemById } = require('../services/findItem');
+const { deleteImage } = require('../helper/deleteImage');
 
 // To get all users
 const getUsers = async (req,res,nex)=>{
@@ -73,6 +74,10 @@ const deleteUser = async (req,res, next) => {
         const user = await findItemById(Users,id)
         // delete user
         await Users.deleteOne({_id: id, isAdmin: false})
+        // image path
+        const defaultPath = user?.image;
+        // delete image
+        deleteImage(defaultPath)
         // response sending
         return successResponse(res, {
             statusCode: 200,
