@@ -36,7 +36,7 @@ const userSchema = new Schema({
         type: Boolean,
         default: false,
     },
-})
+}, {timestamps: true})
 
 const Users = model('Users', userSchema);
 module.exports = Users;
