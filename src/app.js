@@ -3,6 +3,8 @@ const app = express();
 const morgan = require("morgan");
 const createError = require('http-errors');
 const bodyParser = require("body-parser");
+
+
 // const xssClean = require('xss-clean');
 const rateLimit = require('express-rate-limit');
 const expressRouter = require("./routers/userRoute");
@@ -10,7 +12,6 @@ const seedRouter = require("./routers/seedRouter");
 const { errorResponse } = require("./controller/responseController");
 
 // rate limter middleware
-
 const rateLimiter = rateLimit({
     windowMs: 1 * 60 * 1000,
     max: 5,
@@ -19,14 +20,18 @@ const rateLimiter = rateLimit({
 
 // Middleware
 app.use(rateLimiter)
+
 // app.use(xssClean);
 app.use(morgan("dev"));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}))
+
 // Seed api
 app.use('/seed',seedRouter)
+
 // get all user
 app.use('/api',expressRouter)
+
 // get a single user
 app.use('/api', expressRouter)
 
