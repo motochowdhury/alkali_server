@@ -7,8 +7,10 @@ const findItemById = async(Model,id, options = {}) => {
 try {
     // find user byId
     const item = await Model.findById(id, options)
+
     // if empty user
     if(!item) {throw createError('404', `${Model.modelName} doesn't exist`)};
+    
     // return user
     return item;
 } catch (error) {
