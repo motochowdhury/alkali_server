@@ -35,27 +35,6 @@ app.use('/api',expressRouter)
 // get a single user
 app.use('/api', expressRouter)
 
-// Post request
-app.post("/test", (req,res)=>{
-    res.status(200).send({
-        message: "post: api is working fine"
-    })
-})
-
-// Put request
-app.put("/test", (req,res)=>{
-    res.status(200).send({
-        message: "put: api is working fine"
-    })
-})
-
-// delete request
-app.delete("/test", (req,res)=>{
-    res.status(200).send({
-        message: "delete: api is working fine"
-    })
-})
-
 
 // client error handling
 app.use((req,res,next) => {
