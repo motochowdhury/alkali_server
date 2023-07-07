@@ -3,7 +3,6 @@ const {getUsers, getUser, deleteUser} = require('../controller/UserController')
 const expressRouter = express.Router();
 
 // Get request
-
 // get all users
 expressRouter.get("/users", getUsers);
 
