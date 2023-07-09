@@ -23,7 +23,5 @@ try {
 }
 
 }
-// 
-
 // Export services
 module.exports = {findItemById}
