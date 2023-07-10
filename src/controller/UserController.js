@@ -101,13 +101,18 @@ const createUser = async (req,res,next) => {
         address
     }
 
+    const userExist = await Users.exists({email: email});
+    if(userExist) {
+        throw createError(409, 'user already exist')
+    }
+
     return successResponse(res,{
         statusCode: 200,
         message: "user created successfully",
         palyload: {newUser}
     })
   } catch (error) {
-    
+    next(error)
   }
 }
 
