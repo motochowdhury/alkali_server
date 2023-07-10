@@ -89,4 +89,26 @@ const deleteUser = async (req,res, next) => {
     }
 }
 
+// To create user
+const createUser = async (req,res,next) => {
+  try {
+    const {name, email, phone, address} = req.body;
+    // new user
+    const newUser = {
+        name,
+        email,
+        phone,
+        address
+    }
+
+    return successResponse(res,{
+        statusCode: 200,
+        message: "user created successfully",
+        palyload: {newUser}
+    })
+  } catch (error) {
+    
+  }
+}
+
 module.exports = {getUsers, getUser, deleteUser};
