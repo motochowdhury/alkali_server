@@ -32,9 +32,6 @@ app.use('/seed',seedRouter)
 // get all user
 app.use('/api',expressRouter)
 
-// get a single user
-app.use('/api', expressRouter)
-
 
 // client error handling
 app.use((req,res,next) => {
