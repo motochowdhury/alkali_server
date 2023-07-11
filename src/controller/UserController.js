@@ -106,6 +106,7 @@ const createUser = async (req,res,next) => {
         throw createError(409, 'user already exist')
     }
 
+    
     return successResponse(res,{
         statusCode: 200,
         message: "user created successfully",
