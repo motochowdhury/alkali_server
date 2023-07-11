@@ -4,6 +4,7 @@ const { successResponse } = require('./responseController');
 const { findItemById } = require('../services/findItem');
 const { deleteImage } = require('../helper/deleteImage');
 const { JWTToken } = require('../helper/jsonwebtoken');
+const { jwtSecurityKey } = require('../secret');
 
 // To get all users
 const getUsers = async (req,res,nex)=>{
@@ -94,6 +95,12 @@ const deleteUser = async (req,res, next) => {
 const createUser = async (req,res,next) => {
   try {
     const {name, email, phone, address} = req.body;
+    
+    const userExist = await Users.exists({email: email});
+    if(userExist) {
+        throw createError(409, 'user already exist')
+    }
+    
     // new user
     const newUser = {
         name,
@@ -101,13 +108,8 @@ const createUser = async (req,res,next) => {
         phone,
         address
     }
-
-    const userExist = await Users.exists({email: email});
-    if(userExist) {
-        throw createError(409, 'user already exist')
-    }
-
-    const token = JWTToken(newUser,'', '10m')
+    // JWT token
+    const token = JWTToken(newUser, jwtSecurityKey, '10m')
     return successResponse(res,{
         statusCode: 200,
         message: "user created successfully",

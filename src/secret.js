@@ -16,5 +16,6 @@ const jwtSecurityKey = process.env.JWT_KEY || '@@@jbhuHAUIG#%najabajachjah';
 module.exports = {
     serverPort, 
     mongoDbUrl, 
-    profileImage
+    profileImage,
+    jwtSecurityKey
 }
