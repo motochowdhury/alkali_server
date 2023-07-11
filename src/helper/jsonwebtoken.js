@@ -12,7 +12,7 @@ const JWTToken = (palyload, secretKey, expireTime) => {
         const token = jwt.sign(palyload, secretKey, {expiresIn: expireTime});
         return token;
     } catch (error) {
-        
+        throw error
     }
 }
 
