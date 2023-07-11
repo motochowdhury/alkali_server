@@ -3,6 +3,7 @@ const Users = require('../models/users');
 const { successResponse } = require('./responseController');
 const { findItemById } = require('../services/findItem');
 const { deleteImage } = require('../helper/deleteImage');
+const { JWTToken } = require('../helper/jsonwebtoken');
 
 // To get all users
 const getUsers = async (req,res,nex)=>{
@@ -106,11 +107,11 @@ const createUser = async (req,res,next) => {
         throw createError(409, 'user already exist')
     }
 
-    
+    const token = JWTToken(newUser,'', '10m')
     return successResponse(res,{
         statusCode: 200,
         message: "user created successfully",
-        palyload: {newUser}
+        palyload: {token}
     })
   } catch (error) {
     next(error)
