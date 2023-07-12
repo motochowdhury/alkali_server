@@ -96,6 +96,7 @@ const createUser = async (req,res,next) => {
   try {
     const {name, email, phone, address} = req.body;
     
+    // Checking is user exist or not
     const userExist = await Users.exists({email: email});
     if(userExist) {
         throw createError(409, 'user already exist')
