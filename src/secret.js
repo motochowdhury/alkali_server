@@ -11,6 +11,8 @@ const profileImage = process.env.USER_PROFILE || "public/images/users/default.pn
 
 // jwt activation key
 
+// email data setup will be here
+
 const jwtSecurityKey = process.env.JWT_KEY || '@@@jbhuHAUIG#%najabajachjah';
 
 // export module
