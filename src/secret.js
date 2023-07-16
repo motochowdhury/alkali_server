@@ -10,15 +10,20 @@ const mongoDbUrl = process.env.MONGODB_ATLAS_URL || "mongodb://localhost:27017/a
 const profileImage = process.env.USER_PROFILE || "public/images/users/default.png";
 
 // jwt activation key
-
-// email data setup will be here
-
 const jwtSecurityKey = process.env.JWT_KEY || '@@@jbhuHAUIG#%najabajachjah';
+
+// app userName
+const appUserName = process.env.APP_USERNAME || ''
+
+// app password
+const appPassword = process.env.APP_PASSWORD || ''
 
 // export module
 module.exports = {
     serverPort, 
     mongoDbUrl, 
     profileImage,
-    jwtSecurityKey
+    jwtSecurityKey,
+    appUserName,
+    appPassword
 }
