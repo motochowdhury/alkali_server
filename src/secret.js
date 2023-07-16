@@ -13,10 +13,10 @@ const profileImage = process.env.USER_PROFILE || "public/images/users/default.pn
 const jwtSecurityKey = process.env.JWT_KEY || '@@@jbhuHAUIG#%najabajachjah';
 
 // app userName
-const appUserName = process.env.APP_USERNAME || ''
+const smtpUserName = process.env.SMTP_USERNAME || ''
 
 // app password
-const appPassword = process.env.APP_PASSWORD || ''
+const smtpPassword = process.env.SMTP_PASSWORD || ''
 
 // export module
 module.exports = {
@@ -24,6 +24,6 @@ module.exports = {
     mongoDbUrl, 
     profileImage,
     jwtSecurityKey,
-    appUserName,
-    appPassword
+    smtpUserName,
+    smtpPassword
 }
