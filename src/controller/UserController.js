@@ -5,6 +5,7 @@ const { findItemById } = require('../services/findItem');
 const { deleteImage } = require('../helper/deleteImage');
 const { JWTToken } = require('../helper/jsonwebtoken');
 const { jwtSecurityKey, clientUrl } = require('../secret');
+const emailWithNodeMailer = require('../helper/email');
 
 // To get all users
 const getUsers = async (req,res,nex)=>{
@@ -99,7 +100,7 @@ const createUser = async (req,res,next) => {
     // Checking is user exist or not
     const userExist = await Users.exists({email: email});
     if(userExist) {
-        throw createError(409, 'user already exist')
+        throw createError(409, 'user already exist, please sign in')
     }
     
     // new user
@@ -122,9 +123,16 @@ const createUser = async (req,res,next) => {
         `
     }
     
+    try {
+        emailWithNodeMailer(emailData)
+    } catch (error) {
+        next(createError(500, 'Cannot send email deu to error'));
+        return;
+    }
+
     return successResponse(res,{
         statusCode: 200,
-        message: "user created successfully",
+        message: `user created successfully, please check ${email}`,
         palyload: {token}
     })
   } catch (error) {
