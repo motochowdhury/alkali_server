@@ -1,5 +1,12 @@
 const express = require("express");
-const {getUsers, getUser, deleteUser, createUser, verifyUser} = require('../controller/UserController')
+const {
+  getUsers,
+  getUser,
+  deleteUser,
+  createUser,
+  verifyUser,
+} = require("../controller/UserController");
+const upload = require("../middlewares/uploadFile");
 const expressRouter = express.Router();
 
 // Get request
@@ -13,9 +20,9 @@ expressRouter.get("/users/:id", getUser);
 expressRouter.delete("/users/:id", deleteUser);
 
 // Post request
-expressRouter.post("/users/create", createUser)
+expressRouter.post("/users/create", upload.single("image"), createUser);
 
 // post request for verify token
-expressRouter.post("/users/verify", verifyUser)
+expressRouter.post("/users/verify", verifyUser);
 
 module.exports = expressRouter;
