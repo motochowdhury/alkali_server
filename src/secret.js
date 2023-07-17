@@ -18,6 +18,9 @@ const smtpUserName = process.env.SMTP_USERNAME || ''
 // app password
 const smtpPassword = process.env.SMTP_PASSWORD || ''
 
+// client url
+const clientUrl = process.env.CLIENT_URL
+
 // export module
 module.exports = {
     serverPort, 
@@ -25,5 +28,6 @@ module.exports = {
     profileImage,
     jwtSecurityKey,
     smtpUserName,
-    smtpPassword
+    smtpPassword,
+    clientUrl
 }
