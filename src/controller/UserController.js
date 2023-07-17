@@ -6,6 +6,7 @@ const { deleteImage } = require('../helper/deleteImage');
 const { JWTToken } = require('../helper/jsonwebtoken');
 const { jwtSecurityKey, clientUrl } = require('../secret');
 const emailWithNodeMailer = require('../helper/email');
+const jwt = require('jsonwebtoken');
 
 // To get all users
 const getUsers = async (req,res,nex)=>{
@@ -118,8 +119,10 @@ const createUser = async (req,res,next) => {
         email,
         subject: 'Account Activation Email',
         html: `
+        <div>
         <h2>Hello ${name}!</h2>
         <p>Please click this <a href="${clientUrl}/api/users/activation/${token}" target='_blank'>Activation link</a> To activate your account</p>
+        </div>
         `
     }
     
@@ -139,5 +142,25 @@ const createUser = async (req,res,next) => {
     next(error)
   }
 }
+// To create user
+const verifyUser = async (req,res,next) => {
+  try {
+    // body token
+    const token = req.body.token;
+    if(!token) {
+        throw createError(404, "Token doesn't fount")
+    }
+    
+    const decoded = jwt.verify(token, jwtSecurityKey)
+    console.log(decoded);
 
-module.exports = {getUsers, getUser, deleteUser, createUser};
+    return successResponse(res,{
+        statusCode: 200,
+        message: `user created successfully`,
+    })
+  } catch (error) {
+    next(error)
+  }
+}
+
+module.exports = {getUsers, getUser, deleteUser, createUser, verifyUser};
