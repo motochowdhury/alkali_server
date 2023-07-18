@@ -1,5 +1,6 @@
 const multer = require("multer");
 const { userImageDir } = require("../secret");
+const path = require("path");
 
 // Setup storage
 const storage = multer.diskStorage({
@@ -7,8 +8,15 @@ const storage = multer.diskStorage({
     cb(null, userImageDir);
   },
   filename: function (req, file, cb) {
-    // const uniqueSuffix = Date.now() + "-" + Math.round(Math.random() * 1e9);
-    cb(null, Date.now() + "-" + file.originalname);
+    const extName = path.extname(file.originalname);
+    cb(
+      null,
+      "user-profile" +
+        "-" +
+        Date.now() +
+        file.originalname.replace(file.originalname, "") +
+        extName
+    );
   },
 });
 
