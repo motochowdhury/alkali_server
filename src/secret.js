@@ -26,6 +26,12 @@ const clientUrl = process.env.CLIENT_URL;
 // users image path
 const userImageDir = process.env.USERS_IMAGE_DIR || "public/images/users";
 
+// file type
+const fileTypes = process.env.ALLOWED_FILE_TYPES || [jpg, jpeg, png];
+
+// file size
+const maxFileSize = Number(process.env.MAX_FILE_SIZE) || 2097152;
+
 // export module
 module.exports = {
   serverPort,
@@ -36,4 +42,6 @@ module.exports = {
   smtpPassword,
   clientUrl,
   userImageDir,
+  fileTypes,
+  maxFileSize,
 };

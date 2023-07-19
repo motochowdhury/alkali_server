@@ -20,6 +20,8 @@ const storage = multer.diskStorage({
   },
 });
 
+// file type checking function
+
 const upload = multer({ storage: storage });
 
 module.exports = upload;
