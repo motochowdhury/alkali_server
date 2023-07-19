@@ -1,6 +1,7 @@
 const multer = require("multer");
-const { userImageDir } = require("../secret");
+const { userImageDir, maxFileSize, fileTypes } = require("../secret");
 const path = require("path");
+const createError = require("http-errors");
 
 // Setup storage
 const storage = multer.diskStorage({
@@ -21,6 +22,12 @@ const storage = multer.diskStorage({
 });
 
 // file type checking function
+const checkFileTypes = (req, file, cb) => {
+  const extName = path.extname(file.originalname);
+  if (!extName.includes(fileTypes)) {
+    return cb(createError(400, "file types not allowed"));
+  }
+};
 
 const upload = multer({ storage: storage });
 
